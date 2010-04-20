@@ -1,0 +1,40 @@
+Ubuntu Translator
+=================
+
+A terminal translator for ubuntu.
+
+Install:
+    1. Downlaod UbuntuTranslator.
+    2. Edit ~/.bashrc, add two lines:
+        alias tec='<yourdir>/UbuntuTranslator -e2c'
+        alias tce='<yourdir>/UbuntuTranslator -c2e'
+Usage:
+    
+    1. Translate from English to Chinese. Enter in terminal:
+        $ tec <world list>
+
+       Example:
+
+        $ tec hello world
+       or
+        $ tec "hello world"
+
+       output:
+
+        hello world
+        你好世界
+
+    2. Translate from Chinese to English. Enter in terminal:
+         $ tce <world list>
+
+        Example
+
+         $ tce 祝你好运
+        or
+         $ tce "祝你好运"
+
+        output:
+
+         祝你好运
+         Good luck
+
