@@ -30,14 +30,14 @@ Install:
 
         $ mkdir ~/tmp
         $ cd ~/tmp
-        $ git clone git://gitorious.org/ubuntutranslator/ubuntutranslator.git
-        $ cd ~/ubuntutranslator
+        $ git clone git://github.com/zengsai/UbuntuTranslator.git
+        $ cd ~/UbuntuTranslator
         $ make 
 
     2. Edit ~/.bashrc, add two lines: 
-        alias tec='$HOME/ubuntutranslator/UbuntuTranslator -e2c' 
+        alias tec='$HOME/UbuntuTranslator/UbuntuTranslator -e2c' 
 
-        alias tce='$HOME/ubuntutranslator/UbuntuTranslator -c2e' 
+        alias tce='$HOME/UbuntuTranslator/UbuntuTranslator -c2e' 
 
 Usage: 
      
