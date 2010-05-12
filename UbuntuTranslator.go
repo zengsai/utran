@@ -111,7 +111,8 @@ func main() {
 
 	// 解析json数据，并把结果存储在res中。
 	var res Response
-	json.Unmarshal(string(b), &res)
+	// json.Unmarshal(string(b), &res)
+	json.Unmarshal(b, &res)
 
 	if text := res.ResponseData.TranslatedText; len(text) > 0 {
 		fmt.Printf("\n%s\n%s\n\n", words, text)
