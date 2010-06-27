@@ -9,7 +9,7 @@
  *      return string: {"responseData": {"translatedText":"你好世界"}, "responseDetails": null, "responseStatus": 200}
  *
  *
- * 当前版本： 1.02
+ * 当前版本： 1.0.3
  */
 package main
 
@@ -27,7 +27,10 @@ const (
 	c2e      = "zh|en"
 	baseUrl  = "http://ajax.googleapis.com/ajax/services/language/translate?v=1.0&q="
 	langpair = "&langpair="
-	version  = "v 1.02"
+	version  = "v 1.0.3"
+	year	 = "2010"
+	author   = "红猎人"
+	email    = "zengsai@gmail.com"
 )
 
 // 储存返回的数据存储，json解析中使用
@@ -52,7 +55,10 @@ func main() {
 	flag.Parse()
 
 	if *v {
-		println("UbuntuTranslator", version)
+		println("UbuntuTranslator", year)
+		println("版本：", version)
+		println("作者：", author)
+		println("邮件：", email)
 		return
 	}
 
