@@ -26,19 +26,19 @@ Install:
 一、下载bin目录下对应平台的二进制文件，放在任意目录下即可运行。
     暂时只支持 Linux/x86_64 平台。
 
-二、下载源码编译安装
+    或者下载源码编译安装
 
-    假设你已经安装了git和配置好了go语言编译环境。
+	    假设你已经安装了git和配置好了go语言编译环境。
 
-    1.download and complie
+	    1.download and complie
 
-        $ mkdir ~/tmp
-        $ cd ~/tmp
-        $ git clone git://github.com/zengsai/UbuntuTranslator.git
-        $ cd ~/UbuntuTranslator
-        $ make 
+		$ mkdir ~/tmp
+		$ cd ~/tmp
+		$ git clone git://github.com/zengsai/UbuntuTranslator.git
+		$ cd ~/UbuntuTranslator
+		$ make 
 
-    2. Edit ~/.bashrc, add two lines: 
+二、 Edit ~/.bashrc, add two lines: 
         alias tec='$HOME/UbuntuTranslator/UbuntuTranslator -e2c' 
 
         alias tce='$HOME/UbuntuTranslator/UbuntuTranslator -c2e' 
