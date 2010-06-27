@@ -5,7 +5,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-	<title>zengsai/UbuntuTranslator @ GitHub</title>
+	<title>红猎人(zengsai)/UbuntuTranslator @ GitHub</title>
 	
 	<style type="text/css">
 		body {
@@ -46,82 +46,68 @@
     </div>
 
     <h1><a href="http://github.com/zengsai/UbuntuTranslator">UbuntuTranslator</a>
-      <span class="small">by <a href="http://github.com/zengsai">zengsai</a></span></h1>
+      <span class="small">by <a href="http://github.com/zengsai">红猎人</a></span></h1>
 
     <div class="description">
       a simple but useful translator for Ubuntu. 
     </div>
 
     <p>README
-UbuntuTranslator 是一个开源的，用 Go 
-语言编写的很便捷的翻译软件，如果你经常在Linux下工作；如果你经常阅读英文文档；
-如果你讨厌一直开着一个翻译软件白白浪费内存，只是为了偶尔查询一两个不认识的单词；
-如果你想翻译句子，又不想去打开翻译网站；
-如果你想得到高质量的翻译结果；如果你想拥有流畅的阅读。那么它适合你！
-
-它有以下优点：
-
-1. 
-占用内存少。不用再为了偶尔查两个单词或，长期运行星际译王，只在需要查词的时候一个
-命令就搞定。
-   翻译结果出来后自动退出，不会一直运行，占用内存。
-2. 翻译速度快，准确。 
-用Go语言编写，运行速度很快；使用Google的翻译服务，翻译质量有保证。
-3. 流畅的阅读。在阅读英文文档时，偶尔遇到一个不认识的单词，这时我们就得去查字典，
-
-   
-   通常在Ubuntu下，等查完词后，再回到文档，可能之前讲的是什么也忘了，就是说思路中断
-   了。
-   该软件，由于查词或查句的时间非常短，使得阅读思路不被中断。
-
-小技巧：如果工作在Ubuntu下，可以把英文文档打开，再把终端打开，设置为半透明，覆盖在
-文档上。
-      这样，在查词的时候都不用去切换，直接 
-      输入单词--回车--查看结果--继续阅读，阅读更加顺畅！
-
-Usage:
-
-    1. Translate from English to Chinese. Enter in terminal:
-        $ tec
-
-       Example:
-
-        $ tec hello world
-       or
-        $ tec "hello world"
-
-       output:
-
-        hello world
-        你好世界
-
-    2. Translate from Chinese to English. Enter in terminal:
-         $ tce
-
-        Example
-
-         $ tce 祝你好运
-        or
-         $ tce "祝你好运"
-
-        output:
-
-         祝你好运
+UbuntuTranslator 是一个开源的，用 Go 语言<br/>
+编写的很便捷的翻译软件，如果你经常在Linux下工作；如果你经常阅读英文文档；<br/>
+如果你讨厌一直开着一个翻译软件白白浪费内存，只是为了偶尔查询一两个不认识的单词；<br/>
+如果你想翻译句子，又不想去打开翻译网站；<br/>
+如果你想得到高质量的翻译结果；如果你想拥有流畅的阅读。那么它适合你！<br/>
+<br/>
+它有以下优点：<br/>
+<br/>
+1. <br/>
+占用内存少。不用再为了偶尔查两个单词或，长期运行星际译王，只在需要查词的时候一个<br/>
+命令就搞定。<br/>
+   翻译结果出来后自动退出，不会一直运行，占用内存。<br/>
+2. 翻译速度快，准确。 <br/>
+用Go语言编写，运行速度很快；使用Google的翻译服务，翻译质量有保证。<br/>
+3. 流畅的阅读。在阅读英文文档时，偶尔遇到一个不认识的单词，这时我们就得去查字典，<br/>
+<br/>
+   <br/>
+   通常在Ubuntu下，等查完词后，再回到文档，可能之前讲的是什么也忘了，就是说思路中断了。<br/>
+   该软件，由于查词或查句的时间非常短，使得阅读思路不被中断。<br/>
+<br/>
+小技巧：如果工作在Ubuntu下，可以把英文文档打开，再把终端打开，设置为半透明，覆盖在文档上。<br/>
+      这样，在查词的时候都不用去切换，直接 <br/>
+      输入单词--回车--查看结果--继续阅读，阅读更加顺畅！<br/>
+<br/>
+Usage:<br/>
+<br/>
+    1. Translate from English to Chinese. Enter in terminal:<br/>
+        $ tec<br/>
+<br/>
+       Example:<br/>
+<br/>
+        $ tec hello world<br/>
+       or<br/>
+        $ tec "hello world"<br/>
+<br/>
+       output:<br/>
+<br/>
+        hello world<br/>
+        你好世界<br/>
+<br/>
+    2. Translate from Chinese to English. Enter in terminal:<br/>
+         $ tce<br/>
+<br/>
+        Example<br/>
+<br/>
+         $ tce 祝你好运<br/>
+        or<br/>
+         $ tce "祝你好运"<br/>
+<br/>
+        output:<br/>
+<br/>
+         祝你好运<br/>
          Good luck</p><h2>Install</h2>
 <p>一、下载bin目录下对应平台的二进制文件，放在任意目录下即可运行。
     暂时只支持 Linux/x86_64 平台。
-
-    或者下载源码编译安装
-
-      假设你已经安装了git和配置好了go语言编译环境。
-
-      1.download and complie
-
-    $ mkdir ~/tmp
-    $ cd ~/tmp
-    $ git clone git://github.com/zengsai/UbuntuTranslator.git
-    $ cd ~/UbuntuTranslator
-    $ make
 
 二、 Edit ~/.bashrc, add two lines:
         alias tec='$HOME/UbuntuTranslator/UbuntuTranslator -e2c'
@@ -130,9 +116,11 @@ Usage:
 
 </p>
 <h2>Authors</h2>
-<p>红猎人<br/>      </p>
+<p>红猎人
+<br/>      </p>
 <h2>Contact</h2>
-<p>zengsai@gmail.com<br/>      </p>
+<p>zengsai@gmail.com
+<br/>      </p>
 
 
     <h2>Download</h2>
