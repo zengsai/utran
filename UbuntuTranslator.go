@@ -9,7 +9,13 @@
  *      return string: {"responseData": {"translatedText":"你好世界"}, "responseDetails": null, "responseStatus": 200}
  *
  *
- * 当前版本： 1.0.3
+ * 改变内容：如果用户查询的是单词，则调用词海的字典API，返回更详细的解析，只支持中英互译。
+ *           如果用户查询的是短语或句子，则调用Google的翻译API，返回翻译结果。
+ * 之前版本：1.0.3
+ * 修改者：红猎人
+ * 日期：2010-06-30
+ *
+ * 当前版本： 1.1.0
  */
 package main
 
@@ -20,17 +26,19 @@ import (
 	"io/ioutil"
 	"flag"
 	"strings"
+	"xml"
 )
 
 const (
-	e2c      = "en|zh"
-	c2e      = "zh|en"
-	baseUrl  = "http://ajax.googleapis.com/ajax/services/language/translate?v=1.0&q="
-	langpair = "&langpair="
-	version  = "v 1.0.3"
-	year	 = "2010"
-	author   = "红猎人"
-	email    = "zengsai@gmail.com"
+	e2c           = "en|zh"
+	c2e           = "zh|en"
+	googleBaseUrl = "http://ajax.googleapis.com/ajax/services/language/translate?v=1.0&q="
+	langpair      = "&langpair="
+	dictBaseUrl   = "http://api.dict.cn/ws.php?utf8=true&q="
+	version       = "v 1.1.0"
+	year          = "2010"
+	author        = "红猎人"
+	email         = "zengsai@gmail.com"
 )
 
 // 储存返回的数据存储，json解析中使用
@@ -42,6 +50,21 @@ type Response struct {
 
 type Data struct {
 	TranslatedText string
+}
+
+// Dict Struct
+type Sent struct {
+	Orig  string
+	Trans string
+}
+type DictResult struct {
+	XMLName xml.Name "dict"
+	Key     string
+	Lang    string
+	Audio   string
+	Pron    string
+	Def     string
+	Sent    []Sent
 }
 
 // 三个布尔命令行选项的标识，默认为false。
@@ -86,20 +109,32 @@ func main() {
 		return
 	}
 
-	// 获得用户要查询的词或句子
+	var isWord bool = true
+	var url string = ""
 	var words string = ""
-	for i := 0; i < flag.NArg(); i++ {
-		if i > 0 && *ec {
-			words += " "
-		}
-		words += flag.Arg(i)
+
+	if flag.NArg() > 1 {
+		isWord = false
 	}
 
-	words = strings.TrimSpace(words)
-	// 对字符串进行编码，转换成URL格式，如把空格转换成 20%
-	queryWords := http.URLEscape(words)
+	if isWord {
+		// dict
+		url = dictBaseUrl + flag.Arg(0)
+	} else {
+		// 获得用户要查询的词或句子
+		for i := 0; i < flag.NArg(); i++ {
+			if i > 0 && *ec {
+				words += " "
+			}
+			words += flag.Arg(i)
+		}
 
-	url := baseUrl + queryWords + langpair + drection
+		words = strings.TrimSpace(words)
+		// 对字符串进行编码，转换成URL格式，如把空格转换成 20%
+		queryWords := http.URLEscape(words)
+
+		url = googleBaseUrl + queryWords + langpair + drection
+	}
 	/*println(url)*/
 	// 查询
 	r, _, e := http.Get(url)
@@ -107,22 +142,45 @@ func main() {
 		println(e.String())
 		return
 	}
-	// 获得返回的json数据
-	b, e := ioutil.ReadAll(r.Body)
-	r.Body.Close()
-	if e != nil {
-		println(e.String())
-		return
-	}
 
-	// 解析json数据，并把结果存储在res中。
-	var res Response
-	// json.Unmarshal(string(b), &res)
-	json.Unmarshal(b, &res)
+	if isWord {
+		var res DictResult
+		xml.Unmarshal(r.Body, &res)
+		r.Body.Close()
 
-	if text := res.ResponseData.TranslatedText; len(text) > 0 {
-		fmt.Printf("\n%s\n%s\n\n", words, text)
-		return
+		if res.Def != "Not Found" {
+			fmt.Printf("\n原词：%s\t发音:[%s]\n\n解释\n***********************************\n%s\n",
+				res.Key, res.Pron, res.Def)
+
+			if len(res.Sent) > 0 {
+				fmt.Printf("\n例句\n***********************************\n")
+				for _, sent := range res.Sent {
+					fmt.Printf("%s\n%s\n\n", sent.Orig, sent.Trans)
+				}
+			}
+
+			return
+		} else {
+			fmt.Printf("没有找到该词")
+		}
+	} else {
+		// 获得返回的json数据
+		b, e := ioutil.ReadAll(r.Body)
+		r.Body.Close()
+		if e != nil {
+			println(e.String())
+			return
+		}
+
+		// 解析json数据，并把结果存储在res中。
+		var res Response
+		// json.Unmarshal(string(b), &res)
+		json.Unmarshal(b, &res)
+
+		if text := res.ResponseData.TranslatedText; len(text) > 0 {
+			fmt.Printf("\n%s\n%s\n\n", words, text)
+			return
+		}
 	}
 
 	println("Unkown error")
