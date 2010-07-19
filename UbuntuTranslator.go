@@ -9,13 +9,18 @@
  *      return string: {"responseData": {"translatedText":"你好世界"}, "responseDetails": null, "responseStatus": 200}
  *
  *
+ * 改变内容：如果用户在 Dict 中没有查询到单词，尝试通过 Google 翻译返回结果。
+ * 之前版本：1.1.0
+ * 修改者：红猎人
+ * 日期：2010-07-19
+ *
  * 改变内容：如果用户查询的是单词，则调用词海的字典API，返回更详细的解析，只支持中英互译。
  *           如果用户查询的是短语或句子，则调用Google的翻译API，返回翻译结果。
  * 之前版本：1.0.3
  * 修改者：红猎人
  * 日期：2010-06-30
  *
- * 当前版本： 1.1.0
+ * 当前版本： 1.1.1
  */
 package main
 
@@ -35,7 +40,7 @@ const (
 	googleBaseUrl = "http://ajax.googleapis.com/ajax/services/language/translate?v=1.0&q="
 	langpair      = "&langpair="
 	dictBaseUrl   = "http://api.dict.cn/ws.php?utf8=true&q="
-	version       = "v 1.1.0"
+	version       = "v 1.1.1"
 	year          = "2010"
 	author        = "红猎人"
 	email         = "zengsai@gmail.com"
@@ -117,6 +122,7 @@ func main() {
 		isWord = false
 	}
 
+req:
 	if isWord {
 		// dict
 		url = dictBaseUrl + flag.Arg(0)
@@ -161,7 +167,9 @@ func main() {
 
 			return
 		} else {
-			fmt.Printf("没有找到该词")
+			fmt.Printf("dict 没有找到该词, 使用 Google 翻译\n")
+            isWord = false
+            goto req
 		}
 	} else {
 		// 获得返回的json数据
