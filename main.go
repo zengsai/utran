@@ -3,6 +3,7 @@ package main
 import (
     "fmt"
     "github.com/zengsai/utran/engines"
+    . "github.com/zengsai/utran/core"
 )
 
 func main() {
@@ -13,9 +14,9 @@ func main() {
     }
 
     if engine.SupportQuery() {
-        fmt.Println(engine.Name(), "support translate")
+        //fmt.Println(engine.Name(), "support translate")
         word := engine.Query("hello")
-        fmt.Println("\t", word.Key, " -> ", word.Defs)
+        printWord(word)
     }
 
     if engine.SupportTranslate() {
@@ -23,4 +24,15 @@ func main() {
     }
 
     return
+}
+
+func printWord(w Word) {
+        fmt.Println(w.Key, "\n")
+        for _, v := range w.Prons {
+            fmt.Print("[", v.Ps, "]\t\t")
+        }
+        fmt.Println("\n")
+        for _, v := range w.Defs {
+            fmt.Print(v.Pos, "\t", v.Str)
+        }
 }
