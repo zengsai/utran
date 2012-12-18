@@ -2,11 +2,21 @@ package main
 
 import (
     "fmt"
+    "flag"
     "github.com/zengsai/utran/engines"
     . "github.com/zengsai/utran/core"
 )
 
 func main() {
+    flag.Parse()
+
+    if flag.NArg() < 1 {
+        fmt.Println("need words")
+        return
+    }
+
+    query := flag.Arg(0)
+
     engine := engines.New("iciba")
     if engine == nil {
         fmt.Println("no engine")
@@ -14,9 +24,10 @@ func main() {
     }
 
     if engine.SupportQuery() {
-        //fmt.Println(engine.Name(), "support translate")
-        word := engine.Query("hello")
+        word := engine.Query(query)
         printWord(word)
+        fmt.Println("===============================================")
+        fmt.Println("Content Provided by", engine.Name() + "." + engine.Vendor())
     }
 
     if engine.SupportTranslate() {
@@ -27,11 +38,12 @@ func main() {
 }
 
 func printWord(w Word) {
-        fmt.Println(w.Key, "\n")
+        fmt.Print(w.Key, "\t")
         for _, v := range w.Prons {
-            fmt.Print("[", v.Ps, "]\t\t")
+            fmt.Print("[", v.Ps, "]")
+            break
         }
-        fmt.Println("\n")
+        fmt.Println("\n===============================================")
         for _, v := range w.Defs {
             fmt.Print(v.Pos, "\t", v.Str)
         }

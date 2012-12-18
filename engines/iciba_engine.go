@@ -2,30 +2,11 @@ package engines
 
 import . "github.com/zengsai/utran/core"
 import   "encoding/xml"
+import "net/http"
+import "strings"
 // import "fmt"
 
-const (
-    url string = "http://dict-co.iciba.com/api/dictionary.php?w=%s"
-    content string = `
-<?xml version="1.0" encoding="UTF-8"?>
-<dict num="219" id="219" name="219">
-<key>word</key>
-<ps>wə:d</ps>
-<pron>http://res.iciba.com/resource/amp3/0/0/c4/7d/c47d187067c6cf953245f128b5fde62a.mp3</pron>
-<ps>wɚd</ps>
-<pron>http://res.iciba.com/resource/amp3/1/0/c4/7d/c47d187067c6cf953245f128b5fde62a.mp3</pron>
-<pos>n.</pos>
-<acceptation>单词，歌词，台词；（说的）话；诺言；命令；
-</acceptation>
-<pos>vt.</pos>
-<acceptation>措辞，用词；用言语表达；
-</acceptation>
-<pos>vi.</pos>
-<acceptation>讲话；
-</acceptation>
-</dict>
-`
-)
+// const baseUrl string = "http://dict-co.iciba.com/api/dictionary.php?w="
 
 type Result struct {
     XMLName xml.Name `xml:"dict"`
@@ -44,7 +25,16 @@ type iciba_engine struct {
 
 func (e *iciba_engine)Query(word string) Word {
     var r Result
-    err := xml.Unmarshal([]byte(content), &r)
+
+    resp, err := http.Get(e.host + e.uri + strings.ToLower(word))
+    if err != nil {
+        return Word{}
+    }
+
+    decoder := xml.NewDecoder(resp.Body)
+    defer resp.Body.Close()
+
+    err = decoder.Decode(&r)
     // fmt.Println(r)
     if err != nil {
         return Word{}
@@ -72,9 +62,9 @@ func (e *iciba_engine)Translate(stens string) SentPair {
 func new_iciba_engine() Engine {
     var e iciba_engine
     e.flag = 1
-    e.name = "iciba"
-    e.vendor = "jinshan"
-    e.host = "www.iciba.com"
-    e.uri = "query.php?word=%s"
+    e.name = "ICIBA"
+    e.vendor = "JINSHAN"
+    e.host = "http://dict-co.iciba.com"
+    e.uri = "/api/dictionary.php?w="
     return &e
 }
