@@ -1,17 +1,29 @@
 package main
 
 import (
-	"flag"
+    "os"
 	"fmt"
+	"flag"
 	. "github.com/zengsai/utran/core"
 	"github.com/zengsai/utran/engines"
 )
 
+var usage =
+`Usage:
+    %s word
+    %s sentence
+
+Example:
+    %s fast
+    %s the most fast translator in the world
+`
+
 func main() {
 	flag.Parse()
+    name := os.Args[0]
 
 	if flag.NArg() < 1 {
-		fmt.Println("need words")
+        fmt.Printf(usage, name, name, name, name)
 		return
 	}
 
