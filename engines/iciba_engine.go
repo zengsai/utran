@@ -75,6 +75,8 @@ At night they go to bed early, but they don't always go to sleep!
 夜晚，他们很早就上床了，但是他们并不总是就睡着的！
 </trans></sent>
 </dict>
+
+new key:43D712E099C19EEB4A3FDD5C060CE306
 */
 
 type Result struct {
