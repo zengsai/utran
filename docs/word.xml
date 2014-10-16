@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dict num="219" id="219" name="219">
+    <key>world</key>
+    <ps>wɜ:ld</ps>
+    <pron>http://res.iciba.com/resource/amp3/0/0/7d/79/7d793037a0760186574b0282f2f435e7.mp3</pron>
+    <ps>wɜ:rld</ps>
+    <pron>http://res.iciba.com/resource/amp3/1/0/7d/79/7d793037a0760186574b0282f2f435e7.mp3</pron>
+    <pos>n.</pos>
+    <acceptation>世界；地球；领域；尘世；
+    </acceptation>
+    <sent><orig>
+            First world construction, Third world facility, nineth world management. First in the world!
+        </orig>
+        <trans>
+            一流的建筑, 三流的设施, 九流的管理, 举世无双!
+    </trans></sent>
+    <sent><orig>
+            Spatial world discriminates physical world, cognitive world and linguistic world.
+        </orig>
+        <trans>
+            空间世界区分物理空间世界 、 认知空间世界和语言空间世界.
+    </trans></sent>
+    <sent><orig>
+            Half a century ago, no one had thought of world food, world health, world education.
+        </orig>
+        <trans>
+            半个世纪以前, 没有人关注世界的食品问题 、 健康问题和教育问题.
+    </trans></sent>
+    <sent><orig>
+            Today's world is an open world, a world full of both opportunities and challenges.
+        </orig>
+        <trans>
+            当今的世界是开放的世界, 是充满机遇与挑战的世界.
+    </trans></sent>
+    <sent><orig>
+            Was this the New World, the Old World, or the Next World?
+        </orig>
+        <trans>
+            这是新大陆, 还是旧大陆, 还是下一个大陆?
+    </trans></sent>
+</dict>
